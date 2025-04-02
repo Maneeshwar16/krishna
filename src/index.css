@@ -16,7 +16,7 @@ body {
 /* Optimize background images */
 .bg-parallax {
   background-attachment: fixed;
-  background-position: center 40%;
+  background-position: center 30%;
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
@@ -27,8 +27,27 @@ body {
 @media (max-width: 768px) {
   .bg-parallax {
     background-attachment: scroll;
+    background-position: center 40%;
     min-height: 100dvh;
   }
+}
+
+/* Image aspect ratio container */
+.aspect-ratio-box {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.aspect-ratio-box-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
 }
 
 /* Smooth transition classes */

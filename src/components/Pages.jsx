@@ -4,6 +4,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CardDemo from './ui/card-demo';
 import { Link } from 'react-router-dom';
 import HomeCards from './HomeCards';
+import { cn } from '../lib/utils';
+import { WobbleCard } from './ui/wobble-card';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -265,45 +267,25 @@ export function Home() {
         });
       }
 
-      // Program cards stagger animation
+      // Program cards animation
       if (programCardsRef.current.length > 0) {
         programCardsRef.current.forEach((card, index) => {
           if (card) {
-            // Set initial state
-            gsap.set(card, { opacity: 1, y: 0 });
+            gsap.set(card, { opacity: 0, y: 50 });
             
-            // Create a timeline for each card
-            const tl = gsap.timeline({
-              scrollTrigger: {
-                trigger: card,
-                start: "top 80%",
-                toggleActions: "play none none none",
-                markers: false  // Remove markers
-              }
-            });
-
-            tl.fromTo(card,
-              { opacity: 0, y: 100 },
-              {
-                opacity: 1,
-                y: 0,
-                duration: 1,
-                delay: index * 0.2
-              }
-            );
-
-            // Ensure card stays visible
             ScrollTrigger.create({
               trigger: card,
-              start: "top 80%",
-              markers: false,  // Remove markers
+              start: "top 85%",
               onEnter: () => {
                 gsap.to(card, {
                   opacity: 1,
                   y: 0,
-                  duration: 0.5
+                  duration: 0.8,
+                  delay: index * 0.15,
+                  ease: "power3.out"
                 });
-              }
+              },
+              once: true
             });
           }
         });
@@ -346,31 +328,34 @@ export function Home() {
   return (
     <div className="relative w-full">
       {/* Mantra Section */}
-      <section ref={mantrasRef} className="relative min-h-[100dvh] py-10 md:py-20">
+      <section ref={mantrasRef} className="relative min-h-[100dvh] py-16 md:py-24">
         <div className="bg-parallax absolute inset-0" style={{ 
           backgroundImage: "url('/krishna-radha.jpg')",
           backgroundSize: "cover",
-          backgroundPosition: "center 40%"
+          backgroundPosition: "center 30%"
         }}></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-orange-900/70 to-orange-800/70 backdrop-blur-sm"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-900/80 via-orange-800/75 to-black/90 backdrop-blur-[2px]"></div>
         <div className="container mx-auto px-4 relative">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 ref={hareKrishnaRef} className="text-5xl font-bold mb-12 text-white tracking-wider">
+            <h1 ref={hareKrishnaRef} className="text-6xl md:text-7xl font-bold mb-12 text-white tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-orange-200 to-yellow-100">
               HARE KRISHNA 
             </h1>
             
-            <div ref={mantraBoxRef} className="mb-16 p-8 bg-white/10 backdrop-blur-md rounded-lg shadow-xl border border-white/20">
-              <h2 className="text-2xl font-semibold mb-4 text-white">अनन्याश्चिन्तयन्तो मां ये जनाः पर्युपासते ।<br/>
-              तेषां नित्याभियुक्तानां योगक्षेमं वहाम्यहम् ॥</h2>
-              <p className="text-xl mb-4 text-white/90 italic">
+            <div ref={mantraBoxRef} className="mb-16 p-8 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md rounded-2xl shadow-2xl border border-white/10
+              transform transition-all duration-500 hover:border-orange-500/30 hover:shadow-orange-500/20">
+              <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-white leading-relaxed">
+                अनन्याश्चिन्तयन्तो मां ये जनाः पर्युपासते ।<br/>
+                तेषां नित्याभियुक्तानां योगक्षेमं वहाम्यहम् ॥
+              </h2>
+              <p className="text-xl mb-6 text-orange-200/90 italic">
                 ananyāś cintayanto māṁ ye janāḥ paryupāsate<br/>
                 teṣāṁ nityābhiyuktānāṁ yoga-kṣemaṁ vahāmy aham
               </p>
-              <p className="text-lg text-white/80">
+              <p className="text-lg text-white/90 leading-relaxed">
                 This verse highlights Lord Krishna's assurance to His devotees that if they worship Him with unwavering faith and devotion, 
                 He will personally take care of their needs—both material (yoga: acquisition of needs) and spiritual (kṣema: preservation of what is attained).
               </p>
-              <p className="text-sm text-white/60 mt-4">- Bhagavad Gita, Chapter 9, Verse 22</p>
+              <p className="text-sm text-orange-200/80 mt-6 font-medium">- Bhagavad Gita, Chapter 9, Verse 22</p>
             </div>
 
             {/* Category Cards Container with Background */}
@@ -414,15 +399,18 @@ export function Home() {
       </section>
 
       {/* Events Section */}
-      <section ref={eventsRef} className="relative min-h-[100dvh] py-10 md:py-16">
+      <section ref={eventsRef} className="relative min-h-[100dvh] py-16 md:py-24">
         <div className="bg-parallax absolute inset-0" style={{ 
           backgroundImage: "url('/krishna-radha.jpg')",
           backgroundSize: "cover",
-          backgroundPosition: "center 40%"
+          backgroundPosition: "center 30%"
         }}></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-orange-900/70 to-black/90 backdrop-blur-sm"></div>
         <div className="container mx-auto px-4 relative">
-          <h2 className="text-3xl font-bold text-center mb-12 text-white">Upcoming Events</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-orange-200 to-yellow-100">
+            Upcoming Events
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               {
                 title: "Sri Rama Navami Mahostavam",
@@ -452,22 +440,29 @@ export function Home() {
                 ref={addToEventRefs}
                 className="block group"
               >
-                <div className="bg-white/10 backdrop-blur-md rounded-lg shadow-lg overflow-hidden border border-white/20 h-full 
-                  transform transition-all duration-300 
-                  group-hover:-translate-y-2 group-hover:shadow-2xl group-hover:bg-white/20
-                  active:scale-95 active:shadow-inner">
-                  <div className="relative overflow-hidden">
+                <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md rounded-xl shadow-xl overflow-hidden border border-white/10
+                  transform transition-all duration-500 h-full 
+                  group-hover:-translate-y-1 group-hover:shadow-2xl group-hover:border-orange-500/30 group-hover:shadow-orange-500/20
+                  active:scale-[0.98]">
+                  <div className="relative overflow-hidden aspect-[16/9]">
                     <img 
                       src={event.image} 
                       alt={event.title} 
-                      className="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-110" 
+                      className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110" 
+                      style={{
+                        objectPosition: 'center 40%'
+                      }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
                   </div>
                   <div className="p-6">
-                    <h3 className="text-xl font-semibold mb-2 text-white transition-colors duration-300 group-hover:text-orange-200">{event.title}</h3>
-                    <p className="text-white/80 mb-4 transition-colors duration-300 group-hover:text-white">{event.description}</p>
-                    <div className="flex items-center text-white/70 transition-colors duration-300 group-hover:text-orange-200">
+                    <h3 className="text-2xl font-bold mb-3 text-white transition-colors duration-300 group-hover:text-orange-200">
+                      {event.title}
+                    </h3>
+                    <p className="text-white/90 mb-4 transition-colors duration-300 group-hover:text-white">
+                      {event.description}
+                    </p>
+                    <div className="flex items-center text-orange-200/90 transition-colors duration-300 group-hover:text-orange-300">
                       <span className="mr-2">📅</span>
                       {event.date}
                     </div>
@@ -523,7 +518,7 @@ export function Home() {
             <h2 className="text-4xl font-bold text-center mb-16 text-white">
               Engage, Serve & Transform with ISKCON
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {[
                 {
                   title: "Daily Darshan",
@@ -564,7 +559,7 @@ export function Home() {
                 >
                   <div 
                     className="relative bg-black/40 backdrop-blur-md rounded-lg p-8 border border-white/20
-                      transform transition-all duration-300 h-[300px] flex flex-col justify-center
+                      transform transition-all duration-300 h-[400px] flex flex-col justify-center
                       group-hover:-translate-y-2 group-hover:shadow-2xl
                       active:scale-95"
                     onMouseMove={(e) => {
@@ -584,11 +579,11 @@ export function Home() {
                       }}
                     ></div>
                     <div className="relative z-20">
-                      <span className="text-5xl mb-6 block">{program.icon}</span>
-                      <h3 className="text-2xl font-semibold mb-4 text-white group-hover:text-orange-200">
+                      <span className="text-4xl mb-4 block">{program.icon}</span>
+                      <h3 className="text-xl font-semibold mb-3 text-white group-hover:text-orange-200">
                         {program.title}
                       </h3>
-                      <p className="text-lg text-white/80 group-hover:text-white">
+                      <p className="text-base text-white/80 group-hover:text-white">
                         {program.description}
                       </p>
                     </div>
@@ -686,7 +681,6 @@ export function BhagvadGitaCourses() { return <div>Bhagvad Gita Courses Page</di
 export function ChildrenPreaching() { return <div>Children Preaching Page</div> }
 export function CorporateProgrammes() { return <div>Corporate Programmes Page</div> }
 export function SocialWork() { return <div>Social Work Page</div> }
-export function LifeMembership() { return <div>Life Membership Page</div> }
 export function NityaSeva() { return <div>Nitya Seva Page</div> }
 export function GauSeva() { return <div>Gau Seva Page</div> }
 export function FoodForLifeAnnadaan() { return <div>Food For Life Annadaan Page</div> }
@@ -698,4 +692,65 @@ export function Samskara() { return <div>Samskara Page</div> }
 export function BhaktiVriksh() { return <div>Bhakti Vriksh Page</div> }
 export function BhaktiSastri() { return <div>Bhakti Sastri Page</div> }
 export function GitaForYou() { return <div>Gita For You Page</div> }
-export function GopalaFunSchool() { return <div>Gopala Fun School Page</div> } 
+export function GopalaFunSchool() { return <div>Gopala Fun School Page</div> }
+
+export function DailyDarshan() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-orange-900/90 to-black py-20">
+      <div className="container mx-auto px-4">
+        <h1 className="text-4xl md:text-5xl font-bold text-center mb-16 text-white">Daily Darshan</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <WobbleCard
+            containerClassName="bg-orange-800/90 backdrop-blur-md border border-white/20"
+          >
+            <div className="relative z-20">
+              <h2 className="text-2xl font-bold mb-6 text-white">Morning Darshan</h2>
+              <ul className="space-y-4">
+                <li className="text-white/90">
+                  <span className="font-semibold">Mangala Arati:</span> 4:30 AM - 5:00 AM
+                </li>
+                <li className="text-white/90">
+                  <span className="font-semibold">Shringar Arati:</span> 7:15 AM - 7:45 AM
+                </li>
+                <li className="text-white/90">
+                  <span className="font-semibold">Raj Bhog Arati:</span> 12:30 PM - 1:00 PM
+                </li>
+              </ul>
+            </div>
+          </WobbleCard>
+
+          <WobbleCard
+            containerClassName="bg-indigo-800/90 backdrop-blur-md border border-white/20"
+          >
+            <div className="relative z-20">
+              <h2 className="text-2xl font-bold mb-6 text-white">Evening Darshan</h2>
+              <ul className="space-y-4">
+                <li className="text-white/90">
+                  <span className="font-semibold">Dhoop Arati:</span> 4:30 PM - 5:00 PM
+                </li>
+                <li className="text-white/90">
+                  <span className="font-semibold">Sandhya Arati:</span> 7:00 PM - 7:30 PM
+                </li>
+                <li className="text-white/90">
+                  <span className="font-semibold">Shayan Arati:</span> 8:30 PM - 9:00 PM
+                </li>
+              </ul>
+            </div>
+          </WobbleCard>
+        </div>
+
+        <div className="mt-16 text-center max-w-2xl mx-auto">
+          <WobbleCard
+            containerClassName="bg-rose-800/90 backdrop-blur-md border border-white/20"
+          >
+            <div className="relative z-20">
+              <p className="text-lg text-white/90 leading-relaxed">
+                Join us daily for darshan and receive the divine blessings of Their Lordships. The temple is open to all devotees during darshan hours.
+              </p>
+            </div>
+          </WobbleCard>
+        </div>
+      </div>
+    </div>
+  );
+} 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CardBody, CardContainer, CardItem } from './ui/3d-card';
+import { WobbleCard } from './ui/wobble-card';
 
 const cards = [
   {
@@ -31,33 +31,24 @@ const cards = [
 
 export default function HomeCards() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto px-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto px-4 pt-40">
       {cards.map((card, index) => (
         <Link to={card.link} key={index}>
-          <CardContainer>
-            <CardBody className="relative group/card bg-black/[0.6] hover:bg-black/[0.8] w-full h-[200px] rounded-xl p-6 border border-white/[0.1] transition-all duration-500">
-              <CardItem
-                translateZ="50"
-                className="text-3xl"
-              >
+          <WobbleCard
+            containerClassName="bg-black/40 backdrop-blur-sm w-full rounded-xl border border-white/[0.1] transition-all duration-500 hover:bg-black/50"
+          >
+            <div className="relative z-20 p-6">
+              <div className="text-3xl">
                 {card.icon}
-              </CardItem>
-              <CardItem
-                as="h3"
-                translateZ="60"
-                className="text-2xl font-bold text-white mt-4"
-              >
+              </div>
+              <h3 className="text-2xl font-bold text-white mt-4">
                 {card.title}
-              </CardItem>
-              <CardItem
-                as="p"
-                translateZ="80"
-                className="text-white/70 text-sm mt-2 leading-relaxed"
-              >
+              </h3>
+              <p className="text-white/70 text-sm mt-2 leading-relaxed">
                 {card.description}
-              </CardItem>
-            </CardBody>
-          </CardContainer>
+              </p>
+            </div>
+          </WobbleCard>
         </Link>
       ))}
     </div>

@@ -46,42 +46,53 @@ function App() {
   useSmoothScroll();
 
   return (
-    <div className="relative min-h-screen bg-gray-900 overflow-x-hidden w-full">
-      <Navbar activeDropdown={activeDropdown} setActiveDropdown={setActiveDropdown} />
-      <Routes>
-        <Route path="/" element={
-          <>
-            <Hero />
-            <Home />
-          </>
-        } />
-        <Route path="/about-us" element={<AboutUs />} />
-        <Route path="/about-iskcon" element={<AboutIskcon />} />
-        <Route path="/founder-acharya" element={<FounderAcharya />} />
-        <Route path="/our-philosophy" element={<OurPhilosophy />} />
-        <Route path="/our-mission" element={<OurMission />} />
-        <Route path="/aarthi" element={<Aarthi />} />
-        <Route path="/saturday-sasthang" element={<SaturdaySasthang />} />
-        <Route path="/sunday-feast" element={<SundayFeast />} />
-        <Route path="/daily-darshan" element={<DailyDarshan />} />
-        <Route path="/youth-seminar" element={<YouthSeminar />} />
-        <Route path="/counselling" element={<Counselling />} />
-        <Route path="/congregation-preaching" element={<CongregationPreaching />} />
-        <Route path="/bhagvad-gita-courses" element={<BhagvadGitaCourses />} />
-        <Route path="/children-preaching" element={<ChildrenPreaching />} />
-        <Route path="/corporate-programmes" element={<CorporateProgrammes />} />
-        <Route path="/social-work" element={<SocialWork />} />
-        <Route path="/our-programs" element={<OurPrograms />} />
-        <Route path="/life-membership" element={<LifeMembership />} />
-        <Route path="/nitya-seva" element={<NityaSeva />} />
-        <Route path="/gau-seva" element={<GauSeva />} />
-        <Route path="/food-for-life-annadaan" element={<FoodForLifeAnnadaan />} />
-        <Route path="/maha-kumbh-mela" element={<MahaKumbhMela />} />
-        <Route path="/gaura-purnima" element={<GauraPurnima />} />
-        <Route path="/ram-navami" element={<RamNavami />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/samskara" element={<Samskara />} />
-      </Routes>
+    <div className="relative min-h-screen overflow-x-hidden w-full">
+      {/* Background */}
+      <div className="bg-parallax fixed inset-0" style={{ 
+        backgroundImage: "url('/krishna-radha.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center 30%"
+      }}></div>
+      <div className="fixed inset-0 bg-gradient-to-br from-black/80 via-orange-900/70 to-black/90 backdrop-blur-sm"></div>
+      
+      {/* Content */}
+      <div className="relative">
+        <Navbar activeDropdown={activeDropdown} setActiveDropdown={setActiveDropdown} />
+        <Routes>
+          <Route path="/" element={
+            <>
+              <Hero />
+              <Home />
+            </>
+          } />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/about-iskcon" element={<AboutIskcon />} />
+          <Route path="/founder-acharya" element={<FounderAcharya />} />
+          <Route path="/our-philosophy" element={<OurPhilosophy />} />
+          <Route path="/our-mission" element={<OurMission />} />
+          <Route path="/aarthi" element={<Aarthi />} />
+          <Route path="/saturday-sasthang" element={<SaturdaySasthang />} />
+          <Route path="/sunday-feast" element={<SundayFeast />} />
+          <Route path="/daily-darshan" element={<DailyDarshan />} />
+          <Route path="/youth-seminar" element={<YouthSeminar />} />
+          <Route path="/counselling" element={<Counselling />} />
+          <Route path="/congregation-preaching" element={<CongregationPreaching />} />
+          <Route path="/bhagvad-gita-courses" element={<BhagvadGitaCourses />} />
+          <Route path="/children-preaching" element={<ChildrenPreaching />} />
+          <Route path="/corporate-programmes" element={<CorporateProgrammes />} />
+          <Route path="/social-work" element={<SocialWork />} />
+          <Route path="/our-programs" element={<OurPrograms />} />
+          <Route path="/life-membership" element={<LifeMembership />} />
+          <Route path="/nitya-seva" element={<NityaSeva />} />
+          <Route path="/gau-seva" element={<GauSeva />} />
+          <Route path="/food-for-life-annadaan" element={<FoodForLifeAnnadaan />} />
+          <Route path="/maha-kumbh-mela" element={<MahaKumbhMela />} />
+          <Route path="/gaura-purnima" element={<GauraPurnima />} />
+          <Route path="/ram-navami" element={<RamNavami />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/samskara" element={<Samskara />} />
+        </Routes>
+      </div>
     </div>
   );
 }
