@@ -16,9 +16,19 @@ body {
 /* Optimize background images */
 .bg-parallax {
   background-attachment: fixed;
-  background-position: center;
+  background-position: center 40%;
   background-repeat: no-repeat;
   background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+
+/* Mobile optimization for background images */
+@media (max-width: 768px) {
+  .bg-parallax {
+    background-attachment: scroll;
+    min-height: 100dvh;
+  }
 }
 
 /* Smooth transition classes */
@@ -33,4 +43,13 @@ body {
   will-change: transform;
   backface-visibility: hidden;
   perspective: 1000px;
+}
+
+/* Viewport height fixes for mobile */
+.min-h-screen {
+  min-height: 100dvh;
+}
+
+.h-screen {
+  height: 100dvh;
 }

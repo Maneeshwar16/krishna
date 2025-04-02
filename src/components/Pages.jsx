@@ -346,8 +346,12 @@ export function Home() {
   return (
     <div className="relative w-full">
       {/* Mantra Section */}
-      <section ref={mantrasRef} className="relative min-h-screen py-20">
-        <div className="bg-parallax absolute inset-0" style={{ backgroundImage: "url('/krishna-radha.jpg')" }}></div>
+      <section ref={mantrasRef} className="relative min-h-[100dvh] py-10 md:py-20">
+        <div className="bg-parallax absolute inset-0" style={{ 
+          backgroundImage: "url('/krishna-radha.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center 40%"
+        }}></div>
         <div className="absolute inset-0 bg-gradient-to-b from-orange-900/70 to-orange-800/70 backdrop-blur-sm"></div>
         <div className="container mx-auto px-4 relative">
           <div className="max-w-4xl mx-auto text-center">
@@ -410,9 +414,12 @@ export function Home() {
       </section>
 
       {/* Events Section */}
-      <section ref={eventsRef} className="relative min-h-screen py-16">
-        <div className="bg-parallax absolute inset-0" style={{ backgroundImage: "url('/krishna-radha.jpg')" }}></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-orange-900/70 to-orange-800/70 backdrop-blur-sm"></div>
+      <section ref={eventsRef} className="relative min-h-[100dvh] py-10 md:py-16">
+        <div className="bg-parallax absolute inset-0" style={{ 
+          backgroundImage: "url('/krishna-radha.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center 40%"
+        }}></div>
         <div className="container mx-auto px-4 relative">
           <h2 className="text-3xl font-bold text-center mb-12 text-white">Upcoming Events</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -473,15 +480,16 @@ export function Home() {
       </section>
 
       {/* Mala Zoom Section */}
-      <section ref={malaZoomRef} className="relative min-h-[200vh] overflow-hidden bg-black">
+      <section ref={malaZoomRef} className="relative min-h-[200dvh] overflow-hidden bg-black">
         {/* First viewport height - Mala zoom */}
-        <div className="h-screen sticky top-0 flex items-center justify-center">
+        <div className="h-[100dvh] sticky top-0 flex items-center justify-center">
           {/* Krishna image that will be revealed */}
           <div 
             ref={krishnaImageRef} 
             className="absolute inset-0 bg-cover bg-center z-10"
             style={{ 
               backgroundImage: "url('/krishna-radha.jpg')",
+              backgroundPosition: "center 40%",
               opacity: 0
             }}
           ></div>
@@ -489,7 +497,7 @@ export function Home() {
           {/* Mala frame that will zoom */}
           <div 
             ref={malaImageRef}
-            className="relative w-[600px] h-[600px] bg-contain bg-center bg-no-repeat"
+            className="relative w-[80vw] h-[80vw] md:w-[600px] md:h-[600px] bg-contain bg-center bg-no-repeat"
             style={{ 
               backgroundImage: "url('/malawithoutbg.png')",
               transformOrigin: "center center"
@@ -498,11 +506,15 @@ export function Home() {
         </div>
 
         {/* Second viewport height - Program Cards */}
-        <div className="min-h-screen relative">
+        <div className="min-h-[100dvh] relative">
           <div className="absolute inset-0">
             <div 
               className="bg-parallax absolute inset-0"
-              style={{ backgroundImage: "url('/krishna-radha.jpg')" }}
+              style={{ 
+                backgroundImage: "url('/krishna-radha.jpg')",
+                backgroundSize: "cover",
+                backgroundPosition: "center 40%"
+              }}
             ></div>
             <div className="absolute inset-0 bg-gradient-to-b from-orange-900/70 to-orange-800/70 backdrop-blur-sm"></div>
           </div>
