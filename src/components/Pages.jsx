@@ -253,7 +253,7 @@ export function Home() {
             end: "+=100%",    // End after scrolling 100% of section's height
             scrub: true,
             pin: true,        // Pin the section while animating
-            markers: true,
+            markers: false,   // Remove markers
             onUpdate: (self) => {
               // Fade in Krishna image as we scroll
               gsap.to(krishnaImageRef.current, {
@@ -278,7 +278,7 @@ export function Home() {
                 trigger: card,
                 start: "top 80%",
                 toggleActions: "play none none none",
-                markers: true
+                markers: false  // Remove markers
               }
             });
 
@@ -296,6 +296,7 @@ export function Home() {
             ScrollTrigger.create({
               trigger: card,
               start: "top 80%",
+              markers: false,  // Remove markers
               onEnter: () => {
                 gsap.to(card, {
                   opacity: 1,
