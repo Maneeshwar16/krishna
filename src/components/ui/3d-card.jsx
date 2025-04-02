@@ -3,10 +3,6 @@ import { cn } from "../../lib/utils";
 
 const MouseEnterContext = createContext(undefined);
 
-export function useMouseEnter() {
-  return useContext(MouseEnterContext);
-}
-
 const CardContainer = ({
   children,
   className,
@@ -86,12 +82,12 @@ const CardBody = ({
   return (
     <div
       className={cn(
-        "h-96 w-96 [transform-style:preserve-3d]  [perspective:1000px]  flex items-center justify-center",
+        "h-96 w-96 [transform-style:preserve-3d] [perspective:1000px] flex items-center justify-center",
         className
       )}
     >
-      <div className="absolute inset-0 [transform-style:preserve-3d]  [perspective:1000px]">
-        <div className="absolute inset-0 [transform-style:preserve-3d]  [perspective:1000px]">
+      <div className="absolute inset-0 [transform-style:preserve-3d] [perspective:1000px]">
+        <div className="absolute inset-0 [transform-style:preserve-3d] [perspective:1000px]">
           {children}
         </div>
       </div>
@@ -111,7 +107,7 @@ const CardItem = ({
   rotateZ = 0,
   ...rest
 }) => {
-  const [isMouseEntered] = useMouseEnter();
+  const [isMouseEntered] = useContext(MouseEnterContext);
 
   return (
     <Component
