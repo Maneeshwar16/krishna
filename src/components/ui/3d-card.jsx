@@ -51,7 +51,7 @@ const CardContainer = ({
     <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
       <div
         className={cn(
-          "py-20 flex items-center justify-center",
+          "py-8 md:py-20 flex items-center justify-center w-full overflow-hidden",
           containerClassName
         )}
         style={{
@@ -61,7 +61,7 @@ const CardContainer = ({
         <div
           ref={containerRef}
           className={cn(
-            "flex items-center justify-center relative transition-all duration-200 ease-linear",
+            "flex items-center justify-center relative transition-all duration-200 ease-linear w-full",
             className
           )}
           style={{
@@ -82,7 +82,7 @@ const CardBody = ({
   return (
     <div
       className={cn(
-        "h-96 w-96 [transform-style:preserve-3d] [perspective:1000px] flex items-center justify-center",
+        "w-full max-w-96 aspect-[4/3] md:h-96 md:w-96 [transform-style:preserve-3d] [perspective:1000px] flex items-center justify-center",
         className
       )}
     >

@@ -46,7 +46,7 @@ function App() {
   useSmoothScroll();
 
   return (
-    <div className="relative min-h-screen bg-gray-900">
+    <div className="relative min-h-screen bg-gray-900 overflow-x-hidden w-full">
       <Navbar activeDropdown={activeDropdown} setActiveDropdown={setActiveDropdown} />
       <Routes>
         <Route path="/" element={
