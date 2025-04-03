@@ -31,7 +31,7 @@ const cards = [
 
 export default function HomeCards() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto px-4 pt-40">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto px-4 pt-[120px] md:pt-40">
       {cards.map((card, index) => (
         <Link to={card.link} key={index}>
           <WobbleCard
