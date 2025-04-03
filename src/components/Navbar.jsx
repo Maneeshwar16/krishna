@@ -5,7 +5,7 @@ export default function Navbar({ activeDropdown, setActiveDropdown }) {
   return (
     <div className="absolute top-0 left-0 right-0 z-50">
       <nav className="container mx-auto px-4 py-6">
-        <ul className="flex flex-nowrap overflow-x-auto scrollbar-hide justify-center md:justify-between items-center gap-x-6 px-2 md:px-4 text-lg font-medium text-white whitespace-nowrap">
+        <ul className="flex justify-between items-center space-x-6 text-lg font-medium text-white">
           <NavItem title="HOME" href="/" />
           
           {/* ABOUT Dropdown */}
