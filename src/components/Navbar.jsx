@@ -18,11 +18,80 @@ export default function Navbar({ activeDropdown, setActiveDropdown }) {
           <div className="text-white text-xl font-semibold">ISKCON</div>
         </div>
 
-        <ul
-          className={`${
-            mobileOpen ? "flex flex-col space-y-4" : "hidden"
-          } md:flex md:flex-row md:space-x-6 md:space-y-0 justify-between items-start md:items-center text-lg font-medium text-white mt-4 md:mt-0`}
-        >
+        {/* Mobile menu */}
+        <div className={`${mobileOpen ? "block" : "hidden"} md:hidden absolute top-16 left-0 right-0 bg-white/10 backdrop-blur-md rounded-lg p-4 shadow-lg`}>
+          <ul className="flex flex-col space-y-4 text-lg font-medium text-white">
+            <NavItem title="HOME" href="/" onClick={() => setMobileOpen(false)} />
+
+            <NavDropdown
+              title="ABOUT"
+              activeDropdown={activeDropdown}
+              setActiveDropdown={setActiveDropdown}
+              onClose={() => setMobileOpen(false)}
+            >
+              <DropdownLink href="/about-iskcon" onClick={() => setMobileOpen(false)}>ABOUT ISKCON</DropdownLink>
+              <DropdownLink href="/founder-acharya" onClick={() => setMobileOpen(false)}>FOUNDER ACHARYA</DropdownLink>
+              <DropdownLink href="/our-philosophy" onClick={() => setMobileOpen(false)}>OUR PHILOSOPHY</DropdownLink>
+              <DropdownLink href="/our-mission" onClick={() => setMobileOpen(false)}>OUR MISSION</DropdownLink>
+            </NavDropdown>
+
+            <NavDropdown
+              title="TEMPLE"
+              activeDropdown={activeDropdown}
+              setActiveDropdown={setActiveDropdown}
+              onClose={() => setMobileOpen(false)}
+            >
+              <DropdownLink href="/aarthi" onClick={() => setMobileOpen(false)}>Aarthi</DropdownLink>
+              <DropdownLink href="/saturday-sasthang" onClick={() => setMobileOpen(false)}>Saturday Sasthang</DropdownLink>
+              <DropdownLink href="/sunday-feast" onClick={() => setMobileOpen(false)}>Sunday Feast</DropdownLink>
+            </NavDropdown>
+
+            <NavDropdown
+              title="OUR PROGRAM"
+              activeDropdown={activeDropdown}
+              setActiveDropdown={setActiveDropdown}
+              onClose={() => setMobileOpen(false)}
+            >
+              <DropdownSubmenu title="YOUTH PREACHING" onClose={() => setMobileOpen(false)}>
+                <DropdownLink href="/youth-seminar" onClick={() => setMobileOpen(false)}>YOUTH SEMINAR</DropdownLink>
+                <DropdownLink href="/counselling" onClick={() => setMobileOpen(false)}>COUNSELLING</DropdownLink>
+              </DropdownSubmenu>
+              <DropdownSubmenu title="CONGREGATION PREACHING" onClose={() => setMobileOpen(false)}>
+                <DropdownLink href="/bhakti-vriksh" onClick={() => setMobileOpen(false)}>BHAKTI VRIKSH</DropdownLink>
+                <DropdownLink href="/bhakti-sastri" onClick={() => setMobileOpen(false)}>BHAKTI SASTRI</DropdownLink>
+              </DropdownSubmenu>
+              <DropdownSubmenu title="BHAGVAD GITA COURSES" onClose={() => setMobileOpen(false)}>
+                <DropdownLink href="/gita-for-you" onClick={() => setMobileOpen(false)}>GITA FOR YOU</DropdownLink>
+              </DropdownSubmenu>
+              <DropdownSubmenu title="CHILDREN PREACHING" onClose={() => setMobileOpen(false)}>
+                <DropdownLink href="/gopala-fun-school" onClick={() => setMobileOpen(false)}>GOPALA FUN SCHOOL</DropdownLink>
+              </DropdownSubmenu>
+              <DropdownLink href="/corporate-programmes" onClick={() => setMobileOpen(false)}>CORPORATE PROGRAMMES</DropdownLink>
+              <DropdownLink href="/social-work" onClick={() => setMobileOpen(false)}>SOCIAL WORK</DropdownLink>
+            </NavDropdown>
+
+            <NavDropdown
+              title="DONATE"
+              activeDropdown={activeDropdown}
+              setActiveDropdown={setActiveDropdown}
+              onClose={() => setMobileOpen(false)}
+            >
+              <DropdownLink href="/life-membership" onClick={() => setMobileOpen(false)}>LIFE MEMBERSHIP</DropdownLink>
+              <DropdownLink href="/nitya-seva" onClick={() => setMobileOpen(false)}>NITYA SEVA</DropdownLink>
+              <DropdownLink href="/gau-seva" onClick={() => setMobileOpen(false)}>GAU SEVA</DropdownLink>
+              <DropdownLink href="/food-for-life-annadaan" onClick={() => setMobileOpen(false)}>FOOD FOR LIFE ANNADAAN</DropdownLink>
+              <DropdownLink href="/maha-kumbh-mela" onClick={() => setMobileOpen(false)}>MAHA KUMBH MELA</DropdownLink>
+              <DropdownLink href="/gaura-purnima" onClick={() => setMobileOpen(false)}>GAURA PURNIMA</DropdownLink>
+              <DropdownLink href="/ram-navami" onClick={() => setMobileOpen(false)}>RAM NAVAMI</DropdownLink>
+            </NavDropdown>
+
+            <NavItem title="SHOP" href="/shop" onClick={() => setMobileOpen(false)} />
+            <NavItem title="SAMSKARA" href="/samskara" onClick={() => setMobileOpen(false)} />
+          </ul>
+        </div>
+
+        {/* Desktop menu */}
+        <ul className="hidden md:flex md:flex-row md:space-x-6 md:space-y-0 justify-between items-start md:items-center text-lg font-medium text-white mt-4 md:mt-0">
           <NavItem title="HOME" href="/" />
 
           <NavDropdown
@@ -91,17 +160,17 @@ export default function Navbar({ activeDropdown, setActiveDropdown }) {
   );
 }
 
-function NavItem({ title, href }) {
+function NavItem({ title, href, onClick }) {
   return (
     <li>
-      <Link to={href} className="hover:text-yellow-300 transition-colors">
+      <Link to={href} className="hover:text-yellow-300 transition-colors" onClick={onClick}>
         {title}
       </Link>
     </li>
   );
 }
 
-function NavDropdown({ title, activeDropdown, setActiveDropdown, children }) {
+function NavDropdown({ title, activeDropdown, setActiveDropdown, children, onClose }) {
   const isActive = activeDropdown === title;
   const [timeoutId, setTimeoutId] = useState(null);
 
@@ -123,7 +192,10 @@ function NavDropdown({ title, activeDropdown, setActiveDropdown, children }) {
     >
       <button
         className="hover:text-yellow-300 transition-colors flex items-center gap-1"
-        onClick={() => setActiveDropdown(isActive ? null : title)}
+        onClick={() => {
+          setActiveDropdown(isActive ? null : title);
+          if (onClose) onClose();
+        }}
       >
         {title}
         <span className="text-xs">▼</span>
@@ -140,18 +212,19 @@ function NavDropdown({ title, activeDropdown, setActiveDropdown, children }) {
   );
 }
 
-function DropdownLink({ href, children }) {
+function DropdownLink({ href, children, onClick }) {
   return (
     <Link
       to={href}
       className="block px-4 py-2 text-gray-800 hover:bg-yellow-50 hover:text-yellow-600 transition-colors"
+      onClick={onClick}
     >
       {children}
     </Link>
   );
 }
 
-function DropdownSubmenu({ title, children }) {
+function DropdownSubmenu({ title, children, onClose }) {
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
   const [timeoutId, setTimeoutId] = useState(null);
 
@@ -173,7 +246,10 @@ function DropdownSubmenu({ title, children }) {
     >
       <button
         className="w-full text-left px-4 py-2 text-gray-800 hover:bg-yellow-50 hover:text-yellow-600 transition-colors flex justify-between items-center"
-        onClick={() => setIsSubmenuOpen(!isSubmenuOpen)}
+        onClick={() => {
+          setIsSubmenuOpen(!isSubmenuOpen);
+          if (onClose) onClose();
+        }}
       >
         {title}
         <span className="text-xs">→</span>
