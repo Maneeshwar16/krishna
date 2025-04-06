@@ -2,16 +2,32 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Navbar({ activeDropdown, setActiveDropdown }) {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
-    <div className="absolute top-0 left-0 right-0 z-50">
+    <div className="absolute top-0 left-0 right-0 z-50 bg-transparent">
       <nav className="container mx-auto px-4 py-6">
-        <ul className="flex justify-between items-center space-x-6 text-lg font-medium text-white">
+        {/* Hamburger for mobile */}
+        <div className="flex justify-between items-center md:hidden">
+          <div className="text-white text-xl font-semibold">ISKCON</div>
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="text-white text-3xl focus:outline-none"
+          >
+            ☰
+          </button>
+        </div>
+
+        <ul
+          className={`${
+            mobileOpen ? "flex flex-col space-y-4" : "hidden"
+          } md:flex md:flex-row md:space-x-6 md:space-y-0 justify-between items-start md:items-center text-lg font-medium text-white mt-4 md:mt-0`}
+        >
           <NavItem title="HOME" href="/" />
-          
-          {/* ABOUT Dropdown */}
-          <NavDropdown 
-            title="ABOUT" 
-            activeDropdown={activeDropdown} 
+
+          <NavDropdown
+            title="ABOUT"
+            activeDropdown={activeDropdown}
             setActiveDropdown={setActiveDropdown}
           >
             <DropdownLink href="/about-iskcon">ABOUT ISKCON</DropdownLink>
@@ -20,10 +36,9 @@ export default function Navbar({ activeDropdown, setActiveDropdown }) {
             <DropdownLink href="/our-mission">OUR MISSION</DropdownLink>
           </NavDropdown>
 
-          {/* TEMPLE Dropdown */}
-          <NavDropdown 
-            title="TEMPLE" 
-            activeDropdown={activeDropdown} 
+          <NavDropdown
+            title="TEMPLE"
+            activeDropdown={activeDropdown}
             setActiveDropdown={setActiveDropdown}
           >
             <DropdownLink href="/aarthi">Aarthi</DropdownLink>
@@ -31,10 +46,9 @@ export default function Navbar({ activeDropdown, setActiveDropdown }) {
             <DropdownLink href="/sunday-feast">Sunday Feast</DropdownLink>
           </NavDropdown>
 
-          {/* OUR PROGRAM Dropdown */}
-          <NavDropdown 
-            title="OUR PROGRAM" 
-            activeDropdown={activeDropdown} 
+          <NavDropdown
+            title="OUR PROGRAM"
+            activeDropdown={activeDropdown}
             setActiveDropdown={setActiveDropdown}
           >
             <DropdownSubmenu title="YOUTH PREACHING">
@@ -55,10 +69,9 @@ export default function Navbar({ activeDropdown, setActiveDropdown }) {
             <DropdownLink href="/social-work">SOCIAL WORK</DropdownLink>
           </NavDropdown>
 
-          {/* DONATE Dropdown */}
-          <NavDropdown 
-            title="DONATE" 
-            activeDropdown={activeDropdown} 
+          <NavDropdown
+            title="DONATE"
+            activeDropdown={activeDropdown}
             setActiveDropdown={setActiveDropdown}
           >
             <DropdownLink href="/life-membership">LIFE MEMBERSHIP</DropdownLink>
@@ -103,21 +116,21 @@ function NavDropdown({ title, activeDropdown, setActiveDropdown, children }) {
   };
 
   return (
-    <li 
+    <li
       className="relative"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <button 
+      <button
         className="hover:text-yellow-300 transition-colors flex items-center gap-1"
         onClick={() => setActiveDropdown(isActive ? null : title)}
       >
-        {title} 
+        {title}
         <span className="text-xs">▼</span>
       </button>
       {isActive && (
-        <div 
-          className="absolute left-0 mt-2 w-48 bg-white/95 backdrop-blur-sm shadow-lg rounded-md py-2"
+        <div
+          className="absolute left-0 mt-2 w-56 bg-white/95 backdrop-blur-sm shadow-lg rounded-md py-2 z-50"
           onClick={(e) => e.stopPropagation()}
         >
           {children}
@@ -129,8 +142,8 @@ function NavDropdown({ title, activeDropdown, setActiveDropdown, children }) {
 
 function DropdownLink({ href, children }) {
   return (
-    <Link 
-      to={href} 
+    <Link
+      to={href}
       className="block px-4 py-2 text-gray-800 hover:bg-yellow-50 hover:text-yellow-600 transition-colors"
     >
       {children}
@@ -153,12 +166,12 @@ function DropdownSubmenu({ title, children }) {
   };
 
   return (
-    <div 
+    <div
       className="relative"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <button 
+      <button
         className="w-full text-left px-4 py-2 text-gray-800 hover:bg-yellow-50 hover:text-yellow-600 transition-colors flex justify-between items-center"
         onClick={() => setIsSubmenuOpen(!isSubmenuOpen)}
       >
@@ -166,8 +179,8 @@ function DropdownSubmenu({ title, children }) {
         <span className="text-xs">→</span>
       </button>
       {isSubmenuOpen && (
-        <div 
-          className="absolute left-full top-0 mt-0 ml-1 w-48 bg-white/95 backdrop-blur-sm shadow-lg rounded-md py-2"
+        <div
+          className="absolute left-full top-0 mt-0 ml-1 w-48 bg-white/95 backdrop-blur-sm shadow-lg rounded-md py-2 z-50"
           onClick={(e) => e.stopPropagation()}
         >
           {children}
@@ -175,4 +188,4 @@ function DropdownSubmenu({ title, children }) {
       )}
     </div>
   );
-} 
+}
