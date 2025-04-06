@@ -8,14 +8,14 @@ export default function Navbar({ activeDropdown, setActiveDropdown }) {
     <div className="absolute top-0 left-0 right-0 z-50 bg-transparent">
       <nav className="container mx-auto px-4 py-6">
         {/* Hamburger for mobile */}
-        <div className="flex justify-between items-center md:hidden">
-          <div className="text-white text-xl font-semibold">ISKCON</div>
+        <div className="flex items-center md:hidden">
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="text-white text-3xl focus:outline-none"
+            className="text-white text-3xl focus:outline-none mr-4"
           >
             ☰
           </button>
+          <div className="text-white text-xl font-semibold">ISKCON</div>
         </div>
 
         <ul
